@@ -24,7 +24,7 @@ namespace Genetics
             
             for (int n = 0; n < length; n++)
             {
-                genes[n] = Statics.Random.Next(0, 1) == 1;
+                genes[n] = Statics.Random.Next(0, 2) == 1;
             }
 
             return new SingleStrandGenome(genes);

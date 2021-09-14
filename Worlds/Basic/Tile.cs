@@ -55,7 +55,7 @@ namespace Worlds.Basic
         {
             if (_seedlings != null && _seedlings.Count > 0)
             {
-                var random = Statics.Random.Next(0, _seedlings.Count - 1);
+                var random = Statics.Random.Next(0, _seedlings.Count);
 
                 this.Grass = _seedlings[random];
             }
