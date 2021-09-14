@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31313.79
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Evolution", "Evolution\Evolution.csproj", "{BDBF0A10-265C-4A3D-A812-8B18F8767395}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worlds", "Logic\Worlds.csproj", "{E561844A-AFA1-49B3-98EE-533BC92CFF36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worlds", "Worlds\Worlds.csproj", "{E561844A-AFA1-49B3-98EE-533BC92CFF36}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Genetics", "Genetics\Genetics.csproj", "{45FA1567-C72C-469E-B5EA-79F2594848C1}"
 EndProject
