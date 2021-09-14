@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using Worlds;
 using Worlds.Basic;
 
-namespace Evolution
+namespace WebInterface
 {
     public class Startup
     {
