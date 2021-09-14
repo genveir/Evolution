@@ -14,6 +14,8 @@ namespace Worlds.Basic.Entities
 
         public int Height { get; private set; }
 
+        public bool IsDead { get; private set; }
+
         public SingleStrandGenome Genome => _genome;
 
         public Grass()
@@ -31,9 +33,9 @@ namespace Worlds.Basic.Entities
             Height++;
         }
 
-        private static void Die(Tile tile)
+        private void Die()
         {
-            tile.Grass = null;
+            IsDead = true;
         }
 
         private void Spread(Tile tile)
@@ -52,7 +54,7 @@ namespace Worlds.Basic.Entities
                 Grow(); Grow();
             }
 
-            if (Height > 10) Die(tile);
+            if (Height > 10) Die();
             else if (Height > 2) Spread(tile);
 
             return Task.CompletedTask;

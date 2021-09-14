@@ -15,6 +15,8 @@ namespace Worlds.Basic
         private readonly List<Grass> _seedlings;
         public Grass Grass { get; private set; }
 
+        public IEnumerable<Tile> Neighbours => _neighbours;
+
         public Tile()
         {
             _neighbours = new List<Tile>();
@@ -39,7 +41,7 @@ namespace Worlds.Basic
 
         public Task ResolveSeedlings()
         {
-            if (Grass == null)
+            if (Grass == null || Grass.IsDead)
             {
                 GrowSeedling();
             }
