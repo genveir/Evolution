@@ -1,6 +1,4 @@
-﻿
-using Evolution;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 
 namespace Simulation

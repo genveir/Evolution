@@ -5,10 +5,12 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Simulation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Worlds.Basic;
 
 namespace Evolution
 {
@@ -27,6 +29,9 @@ namespace Evolution
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+
+            services.AddScoped<ISimulationEngine, Engine>();
+            services.AddScoped<IWorld, World>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
