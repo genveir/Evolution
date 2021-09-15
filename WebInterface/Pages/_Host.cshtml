@@ -31,5 +31,18 @@
     </div>
 
     <script src="_framework/blazor.server.js"></script>
+    <script src="_content/Blazor.Extensions.Canvas/blazor.extensions.canvas.js"></script>
+
+    <script>
+        function animationLoop(timeStamp) {
+            window.requestAnimationFrame(animationLoop);
+            gameInstance.invokeMethodAsync('RenderFrame', timeStamp);
+        }
+
+        window.subscribeToAnimationLoop = (instance) => {
+            window.gameInstance = instance;
+            window.requestAnimationFrame(animationLoop);
+        }
+    </script>
 </body>
 </html>

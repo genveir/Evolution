@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebInterface.Display;
 using Worlds;
 using Worlds.Basic;
 
@@ -30,9 +31,13 @@ namespace WebInterface
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddHttpContextAccessor();
 
             services.AddScoped<ISimulationEngine, Engine>();
-            services.AddScoped<IWorld, World>();
+            services.AddScoped<World>();
+            services.AddScoped<IWorld>(services => services.GetRequiredService<World>());
+
+            services.AddScoped<IWorldCanvasContext, BasicWorldCanvasContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

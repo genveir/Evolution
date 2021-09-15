@@ -60,5 +60,11 @@ namespace Worlds.Basic
                 this.Grass = _seedlings[random];
             }
         }
+
+        public override string ToString()
+        {
+            if (Grass == null) return ".";
+            else return Grass.Genome[0] ? "s" : "f";
+        }
     }
 }
