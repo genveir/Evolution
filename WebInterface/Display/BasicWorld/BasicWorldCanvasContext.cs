@@ -93,7 +93,7 @@ namespace WebInterface.Display
             var heightAdjustedColor = Color.FromArgb(drawingColor.R + 10 * height, drawingColor.G + 10 * height, drawingColor.B + 10 * height);
 
             byte max = 255;
-            var safeAdjustedColor = Color.FromArgb(Math.Max(max, heightAdjustedColor.R), Math.Max(max, heightAdjustedColor.G), Math.Max(max, heightAdjustedColor.B));
+            var safeAdjustedColor = Color.FromArgb(Math.Min(max, heightAdjustedColor.R), Math.Min(max, heightAdjustedColor.G), Math.Min(max, heightAdjustedColor.B));
 
             return ColorTranslator.ToHtml(safeAdjustedColor);
         }
