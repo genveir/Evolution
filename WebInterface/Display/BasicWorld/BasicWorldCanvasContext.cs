@@ -64,21 +64,19 @@ namespace WebInterface.Display
             }
         }
 
-        enum GrassType { None, Slow, Fast }
         private async Task DrawTile(Tile tile, int y, int x)
         {
-            GrassType grassType;
-            int height;
-            if (tile.Grass == null)
-            {
-                grassType = GrassType.None;
-                height = 0;
-            }
-            else
-            {
-                grassType = tile.Grass.Genome[0] ? GrassType.Slow : GrassType.Fast;
-                height = tile.Grass.Height;
-            }
+            var color = GetGrassColor(tile);
+
+            await Context.SetFillStyleAsync(color);
+
+            await Context.FillRectAsync(x * 9, y * 9, 8, 8);
+        }
+
+        enum GrassType { None, Slow, Fast }
+        private static string GetGrassColor(Tile tile)
+        {
+            (var grassType, var height) = ParseGrass(tile);
 
             var baseNone = ColorTranslator.FromHtml("#524019");
             var baseSlow = Color.FromArgb(0, 100, 0);
@@ -94,11 +92,28 @@ namespace WebInterface.Display
 
             var heightAdjustedColor = Color.FromArgb(drawingColor.R + 10 * height, drawingColor.G + 10 * height, drawingColor.B + 10 * height);
 
-            var color = ColorTranslator.ToHtml(heightAdjustedColor);
+            byte max = 255;
+            var safeAdjustedColor = Color.FromArgb(Math.Max(max, heightAdjustedColor.R), Math.Max(max, heightAdjustedColor.G), Math.Max(max, heightAdjustedColor.B));
 
-            await Context.SetFillStyleAsync(color);
+            return ColorTranslator.ToHtml(safeAdjustedColor);
+        }
 
-            await Context.FillRectAsync(x * 9, y * 9, 8, 8);
+        private static (GrassType grassType, int height) ParseGrass(Tile tile)
+        {
+            GrassType grassType;
+            int height;
+            if (tile.Grass == null)
+            {
+                grassType = GrassType.None;
+                height = 0;
+            }
+            else
+            {
+                grassType = tile.Grass.Genome[0] ? GrassType.Slow : GrassType.Fast;
+                height = tile.Grass.Height;
+            }
+
+            return (grassType, height);
         }
     }
 }

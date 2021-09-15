@@ -33,9 +33,9 @@ namespace WebInterface
             services.AddServerSideBlazor();
             services.AddHttpContextAccessor();
 
-            services.AddScoped<ISimulationEngine, Engine>();
-            services.AddScoped<World>();
-            services.AddScoped<IWorld>(services => services.GetRequiredService<World>());
+            services.AddSingleton<ISimulationEngine, Engine>();
+            services.AddSingleton<World>();
+            services.AddSingleton<IWorld>(services => services.GetRequiredService<World>());
 
             services.AddScoped<IWorldCanvasContext, BasicWorldCanvasContext>();
         }

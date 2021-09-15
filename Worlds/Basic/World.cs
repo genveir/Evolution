@@ -10,6 +10,8 @@ namespace Worlds.Basic
 {
     public class World : IWorld
     {
+        public Guid Id = Guid.NewGuid();
+
         public interface IDisplayer
         {
             Task Display(World world);
@@ -50,7 +52,11 @@ namespace Worlds.Basic
             await EachTile(tile => tile.SimulateStep());
 
             await EachTile(Tile => Tile.ResolveSeedlings());
+
+            Tick++;
         }
+
+        public int Tick { get; private set; }
 
         private async Task EachTile(Func<Tile, Task> action)
         {
