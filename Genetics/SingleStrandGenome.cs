@@ -16,7 +16,11 @@ namespace Genetics
             _genes = genes;
         }
 
-        public bool this[int index] => _genes[index];
+        public bool this[int index]
+        {
+            get { return _genes[index]; }
+            set { _genes[index] = value; }
+        }
 
         public static SingleStrandGenome Random(int length)
         {

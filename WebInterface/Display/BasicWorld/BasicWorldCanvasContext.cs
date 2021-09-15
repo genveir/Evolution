@@ -102,7 +102,7 @@ namespace WebInterface.Display
         {
             GrassType grassType;
             int height;
-            if (tile.Grass == null)
+            if (tile.Grass == null || tile.Grass.IsDead)
             {
                 grassType = GrassType.None;
                 height = 0;

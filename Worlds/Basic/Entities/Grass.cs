@@ -20,7 +20,9 @@ namespace Worlds.Basic.Entities
 
         public Grass()
         {
-            _genome = SingleStrandGenome.Random(1);
+            var genes = new bool[] { false };
+
+            _genome = new SingleStrandGenome(genes);
         }
 
         public Grass(Grass parent)
