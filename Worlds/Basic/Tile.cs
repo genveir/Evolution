@@ -8,25 +8,14 @@ using Worlds.Basic.Entities;
 
 namespace Worlds.Basic
 {
-    public class Tile
+    public class Tile : BasicTile
     {
-        private readonly List<Tile> _neighbours;
-
         private readonly List<Grass> _seedlings;
         public Grass Grass { get; private set; }
 
-        public IEnumerable<Tile> Neighbours => _neighbours;
-
-        public Tile()
+        public Tile() : base()
         {
-            _neighbours = new List<Tile>();
             _seedlings = new List<Grass>();
-        }
-
-        public void LinkNeighbour(Tile newNeighbour)
-        {
-            _neighbours.Add(newNeighbour);
-            newNeighbour._neighbours.Add(this);
         }
 
         public async Task SimulateStep()

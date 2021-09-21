@@ -42,7 +42,7 @@ namespace Worlds.Basic.Entities
 
         private void Spread(Tile tile)
         {
-            foreach (var neighbour in tile.Neighbours)
+            foreach (Tile neighbour in tile.Neighbours)
             {
                 neighbour.AddSeedling(new Grass(this));
             }

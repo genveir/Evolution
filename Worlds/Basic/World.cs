@@ -25,19 +25,14 @@ namespace Worlds.Basic
 
         public World()
         {
-            Tiles = new Tile[Y_SIZE][];
+            Tiles = WorldBuilder.GenerateTiles(() => new Tile(), Y_SIZE, X_SIZE);
 
             var random = Statics.Random;
 
             for (int y = 0; y < Tiles.Length; y++)
             {
-                Tiles[y] = new Tile[X_SIZE];
                 for (int x = 0; x < Tiles[y].Length; x++)
                 {
-                    Tiles[y][x] = new Tile();
-                    if (y > 0) Tiles[y][x].LinkNeighbour(Tiles[y - 1][x]);
-                    if (x > 0) Tiles[y][x].LinkNeighbour(Tiles[y][x - 1]);
-
                     if (random.NextDouble() < INITIAL_GRASS_SPAWN_RATE)
                     {
                         Tiles[y][x].AddSeedling(new Grass());
