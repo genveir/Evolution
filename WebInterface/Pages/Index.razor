@@ -3,7 +3,7 @@
 @page "/"
 @inject IJSRuntime jsRunTime
 @inject IWorldCanvasContext _context 
-@inject ISimulationEngine _engine 
+@inject Runner runner
 
 <div tabindex="0" @onkeydown="KeyDown">
     <div class="row align-items-center">
@@ -22,6 +22,8 @@
     {
         if (firstRender)
         {
+            Task.Run(() => runner.Run());
+
             await this._context.InitializeAsync(_canvasReference);
 
             await jsRunTime.InvokeAsync<object>("subscribeToAnimationLoop", DotNetObjectReference.Create(this));
@@ -30,7 +32,7 @@
 
     protected async Task KeyDown(KeyboardEventArgs e)
     {
-        if (e.Key == " ") await _engine.SimulateStep();
+        if (e.Key == " ") await runner.ToggleRunning();
     }
 
     bool rendering = false;

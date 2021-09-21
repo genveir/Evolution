@@ -33,6 +33,7 @@ namespace WebInterface
             services.AddServerSideBlazor();
             services.AddHttpContextAccessor();
 
+            services.AddSingleton<Runner>();
             services.AddSingleton<ISimulationEngine, Engine>();
             services.AddSingleton<World>();
             services.AddSingleton<IWorld>(services => services.GetRequiredService<World>());
