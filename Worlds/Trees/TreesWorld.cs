@@ -8,14 +8,14 @@ namespace Worlds.Trees
 {
     public class TreesWorld : IWorld<TreesWorld>
     {
-        public Task Display(IDisplayer<TreesWorld> displayer)
+        public async Task Display(IDisplayer<TreesWorld> displayer)
         {
-            throw new NotImplementedException();
+            await displayer.Display(this);
         }
 
         public Task SimulateStep()
         {
-            throw new NotImplementedException();
+            return Task.CompletedTask;
         }
     }
 }

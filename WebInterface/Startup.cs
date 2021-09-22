@@ -12,8 +12,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebInterface.Display;
 using WebInterface.Display.BasicWorld;
+using WebInterface.Display.TreesWorld;
 using Worlds;
 using Worlds.Basic;
+using Worlds.Trees;
 
 namespace WebInterface
 {
@@ -35,12 +37,13 @@ namespace WebInterface
 
             SetupDisplayers(services);
 
-            SetupGenericWorldServices<BasicWorld>(services);
+            SetupGenericWorldServices<TreesWorld>(services);
         }
 
         private void SetupDisplayers(IServiceCollection services)
         {
             services.AddSingleton<ICanvasDisplayer<BasicWorld>, BasicWorldDisplayer>();
+            services.AddSingleton<ICanvasDisplayer<TreesWorld>, TreesWorldDisplayer>();
         }
 
         private void SetupGenericWorldServices<WorldType>(IServiceCollection services)
