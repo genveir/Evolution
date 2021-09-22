@@ -40,13 +40,13 @@ namespace WebInterface
             SetupGenericWorldServices<TreesWorld>(services);
         }
 
-        private void SetupDisplayers(IServiceCollection services)
+        private static void SetupDisplayers(IServiceCollection services)
         {
             services.AddSingleton<ICanvasDisplayer<BasicWorld>, BasicWorldDisplayer>();
             services.AddSingleton<ICanvasDisplayer<TreesWorld>, TreesWorldDisplayer>();
         }
 
-        private void SetupGenericWorldServices<WorldType>(IServiceCollection services)
+        private static void SetupGenericWorldServices<WorldType>(IServiceCollection services)
             where WorldType : class, IWorld<WorldType>
         {
             services.AddSingleton<Runner>();
@@ -57,6 +57,7 @@ namespace WebInterface
             services.AddSingleton<IWorld<WorldType>, WorldType>();
         }
 
+#pragma warning disable IDE0060 // not using env, but has to be on the method
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -71,5 +72,6 @@ namespace WebInterface
                 endpoints.MapFallbackToPage("/_Host");
             });
         }
+#pragma warning restore
     }
 }
