@@ -11,7 +11,7 @@ using Worlds.Basic;
 
 namespace WebInterface.Display
 {
-    public class BasicWorldCanvasContext : IWorldCanvasContext, World.IDisplayer
+    public class BasicWorldCanvasContext : IWorldCanvasContext, IDisplayer<World>
     {
         internal Canvas2DContext Context { get; private set; }
 

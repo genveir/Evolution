@@ -12,11 +12,6 @@ namespace Worlds.Basic
     {
         public Guid Id = Guid.NewGuid();
 
-        public interface IDisplayer
-        {
-            Task Display(World world);
-        }
-
         private const int Y_SIZE = 100;
         private const int X_SIZE = 100;
         private const double INITIAL_GRASS_SPAWN_RATE = 0.3d;
@@ -64,7 +59,7 @@ namespace Worlds.Basic
             }
         }
 
-        public async Task Display(IDisplayer displayer)
+        public async Task Display(IDisplayer<World> displayer)
         {
             await displayer.Display(this);
         }
