@@ -34,11 +34,24 @@ namespace WebInterface
             services.AddServerSideBlazor();
 
             services.AddSingleton<Runner>();
-            services.AddSingleton<ISimulationEngine, Engine<BasicWorld>>();
-            services.AddSingleton<IWorld<BasicWorld>, BasicWorld>();
 
-            services.AddScoped<IWorldCanvasContext, WorldCanvasContext<BasicWorld>>();
-            services.AddScoped<ICanvasDisplayer<BasicWorld>, BasicWorldDisplayer>();
+            SetupDisplayers(services);
+
+            SetupGenericWorldServices<BasicWorld>(services);
+        }
+
+        private void SetupDisplayers(IServiceCollection services)
+        {
+            services.AddSingleton<ICanvasDisplayer<BasicWorld>, BasicWorldDisplayer>();
+        }
+
+        private void SetupGenericWorldServices<WorldType>(IServiceCollection services)
+            where WorldType : class, IWorld<WorldType>
+        {
+            services.AddSingleton<ISimulationEngine, Engine<WorldType>>();
+            services.AddSingleton<IWorldCanvasContext, WorldCanvasContext<WorldType>>();
+
+            services.AddSingleton<IWorld<WorldType>, WorldType>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
