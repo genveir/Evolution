@@ -8,7 +8,7 @@ using Worlds.Basic.Entities;
 
 namespace Worlds.Basic
 {
-    public class World : IWorld
+    public class BasicWorld : IWorld<BasicWorld>
     {
         public Guid Id = Guid.NewGuid();
 
@@ -18,7 +18,7 @@ namespace Worlds.Basic
 
         public Tile[][] Tiles { get; }
 
-        public World()
+        public BasicWorld()
         {
             Tiles = WorldBuilder.GenerateTiles(() => new Tile(), Y_SIZE, X_SIZE);
 
@@ -59,7 +59,7 @@ namespace Worlds.Basic
             }
         }
 
-        public async Task Display(IDisplayer<World> displayer)
+        public async Task Display(IDisplayer<BasicWorld> displayer)
         {
             await displayer.Display(this);
         }

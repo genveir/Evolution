@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebInterface.Display;
+using WebInterface.Display.BasicWorld;
 using Worlds;
 using Worlds.Basic;
 
@@ -31,31 +32,19 @@ namespace WebInterface
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddHttpContextAccessor();
 
             services.AddSingleton<Runner>();
-            services.AddSingleton<ISimulationEngine, Engine>();
-            services.AddSingleton<World>();
-            services.AddSingleton<IWorld>(services => services.GetRequiredService<World>());
+            services.AddSingleton<ISimulationEngine, Engine<BasicWorld>>();
+            services.AddSingleton<IWorld<BasicWorld>, BasicWorld>();
 
-            services.AddScoped<IWorldCanvasContext, BasicWorldCanvasContext>();
+            services.AddScoped<IWorldCanvasContext, WorldCanvasContext<BasicWorld>>();
+            services.AddScoped<ICanvasDisplayer<BasicWorld>, BasicWorldDisplayer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-
-            app.UseHttpsRedirection();
+            app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
 
             app.UseRouting();

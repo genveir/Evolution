@@ -4,11 +4,11 @@ using Worlds;
 
 namespace Simulation
 {
-    public class Engine : ISimulationEngine
+    public class Engine<WorldType> : ISimulationEngine where WorldType : IWorld<WorldType>
     {
-        private readonly IWorld _world;
+        private readonly IWorld<WorldType> _world;
 
-        public Engine(IWorld world)
+        public Engine(IWorld<WorldType> world)
         {
             _world = world;
         }

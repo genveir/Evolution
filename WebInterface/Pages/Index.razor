@@ -18,12 +18,15 @@
 @code {
     protected Blazor.Extensions.BECanvasComponent _canvasReference;
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+        protected override void OnInitialized()
+        {
+            Task.Run(() => runner.Run());
+        }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            Task.Run(() => runner.Run());
-
             await this._context.InitializeAsync(_canvasReference);
 
             await jsRunTime.InvokeAsync<object>("subscribeToAnimationLoop", DotNetObjectReference.Create(this));

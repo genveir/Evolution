@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Worlds
 {
-    public interface IDisplayer<WorldType> where WorldType : IWorld
+    public interface IDisplayer<WorldType> where WorldType : IWorld<WorldType>
     {
         Task Display(WorldType world);
     }

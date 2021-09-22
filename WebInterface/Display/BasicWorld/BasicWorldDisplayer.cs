@@ -9,48 +9,35 @@ using System.Threading.Tasks;
 using Worlds;
 using Worlds.Basic;
 
-namespace WebInterface.Display
+namespace WebInterface.Display.BasicWorld
 {
-    public class BasicWorldCanvasContext : IWorldCanvasContext, IDisplayer<World>
+    public class BasicWorldDisplayer : ICanvasDisplayer<Worlds.Basic.BasicWorld>
     {
-        internal Canvas2DContext Context { get; private set; }
+        private Canvas2DContext _context;
 
-        private readonly IHttpContextAccessor _httpContextAccessor;
-
-        public BasicWorldCanvasContext(IHttpContextAccessor contextAccessor)
+        public Task InitializeContext(Canvas2DContext context)
         {
-            _httpContextAccessor = contextAccessor;
+            _context = context;
+
+            return Task.CompletedTask;
         }
 
-        public async Task InitializeAsync(BECanvasComponent canvasReference)
+        public async Task Display(Worlds.Basic.BasicWorld world)
         {
-            Context = await canvasReference.CreateCanvas2DAsync();
-        }
-
-        public async Task RenderFrameAsync()
-        {
-            var httpContext = _httpContextAccessor.HttpContext;
-            var world = (World)httpContext.RequestServices.GetService(typeof(World));
-
-            await world.Display(this);
-        }
-
-        public async Task Display(World world)
-        {
-            await Context.BeginBatchAsync();
+            await _context.BeginBatchAsync();
 
             await DrawBackGround();
 
             await DrawTiles(world.Tiles);
 
-            await Context.EndBatchAsync();
+            await _context.EndBatchAsync();
         }
 
         private async Task DrawBackGround()
         {
-            await Context.SetFillStyleAsync("#524019");
+            await _context.SetFillStyleAsync("#524019");
 
-            await Context.FillRectAsync(0, 0, 900, 900);
+            await _context.FillRectAsync(0, 0, 900, 900);
         }
 
         private async Task DrawTiles(Tile[][] tiles)
@@ -68,9 +55,9 @@ namespace WebInterface.Display
         {
             var color = GetGrassColor(tile);
 
-            await Context.SetFillStyleAsync(color);
+            await _context.SetFillStyleAsync(color);
 
-            await Context.FillRectAsync(x * 9, y * 9, 8, 8);
+            await _context.FillRectAsync(x * 9, y * 9, 8, 8);
         }
 
         enum GrassType { None, Slow, Fast }
