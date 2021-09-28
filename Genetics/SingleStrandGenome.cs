@@ -10,16 +10,25 @@ namespace Genetics
     public class SingleStrandGenome
     {
         private readonly bool[] _genes;
+        private readonly string _geneString;
 
         public SingleStrandGenome(bool[] genes)
         {
             _genes = genes;
+            _geneString = new string(genes.Select(g => g ? '1' : '0').ToArray());
         }
 
         public bool this[int index]
         {
             get { return _genes[index]; }
             set { _genes[index] = value; }
+        }
+
+        public long Number(int startIndex, int length)
+        {
+            var binary = _geneString.Substring(startIndex, length);
+
+            return Convert.ToInt64(binary, 2);
         }
 
         public static SingleStrandGenome Random(int length)

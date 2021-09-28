@@ -10,5 +10,9 @@ namespace WebInterface.Display
     public interface ICanvasDisplayer<WorldType> : IDisplayer<WorldType> where WorldType : IWorld<WorldType>
     {
         Task InitializeContext(Canvas2DContext context);
+
+        int GetWidth();
+
+        int GetHeight();
     }
 }

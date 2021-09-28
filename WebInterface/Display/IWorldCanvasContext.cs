@@ -11,5 +11,8 @@ namespace WebInterface.Display
         public Task InitializeAsync(BECanvasComponent canvasReference);
 
         public Task RenderFrameAsync();
+
+        public int GetHeight();
+        public int GetWidth();
     }
 }

@@ -2,14 +2,14 @@
 
 @page "/"
 @inject IJSRuntime jsRunTime
-@inject IWorldCanvasContext _context 
+@inject IWorldCanvasContext _context
 @inject Runner runner
 
 <div tabindex="0" @onkeydown="KeyDown">
     <div class="row align-items-center">
         <div class="col">
             <div class="container-canvas">
-                <BECanvas Width="900" Height="900" @ref="_canvasReference"></BECanvas>
+                <BECanvas Width="@_context.GetWidth()" Height="@_context.GetHeight()" @ref="_canvasReference"></BECanvas>
             </div>
         </div>
     </div>
@@ -18,12 +18,12 @@
 @code {
     protected Blazor.Extensions.BECanvasComponent _canvasReference;
 
-        protected override void OnInitialized()
-        {
-            Task.Run(() => runner.Run());
-        }
+    protected override void OnInitialized()
+    {
+        Task.Run(() => runner.Run());
+    }
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
