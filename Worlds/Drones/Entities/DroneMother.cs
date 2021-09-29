@@ -9,9 +9,11 @@ using System.Threading.Tasks;
 
 namespace Worlds.Drones.Entities
 {
-    public class Drone_Mother : IBody
+    public class DroneMother : IBody
     {
-        public Drone_Mother(ILocation location, SingleStrandGenome blueprint)
+        internal const int BLUEPRINT_LENGTH = 12;
+
+        public DroneMother(ILocation location, SingleStrandGenome blueprint)
         {
             Location = location;
 
