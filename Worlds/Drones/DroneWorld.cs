@@ -58,7 +58,23 @@ namespace Worlds.Drones
 
         private static async Task<SimulationResult> Simulate(DroneMother mother)
         {
-            return await Task.FromResult(new SimulationResult(mother, 0, new List<SimulationState>()));
+            var currentState = SimulationState.CreateNew(mother);
+
+            var states = new List<SimulationState>();
+            for (int n = 0; n < 99; n++) // 100 states. initial + 99 steps.
+            {
+                states.Add(currentState);
+
+                currentState = await SimulateStep(currentState);
+            }
+            states.Add(currentState);
+
+            return await Task.FromResult(new SimulationResult(mother, currentState.Asteroids.Sum(a => a.Ore), states));
+        }
+
+        private static async Task<SimulationState> SimulateStep(SimulationState state)
+        {
+            return await Task.FromResult(state);
         }
 
         private static Task<SingleStrandGenome[]> CreateNewBlueprints(IEnumerable<SimulationResult> results)

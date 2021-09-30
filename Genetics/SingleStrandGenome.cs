@@ -56,5 +56,10 @@ namespace Genetics
 
             return new SingleStrandGenome(newGenes);
         }
+
+        public override string ToString()
+        {
+            return _geneString;
+        }
     }
 }

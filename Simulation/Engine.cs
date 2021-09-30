@@ -8,6 +8,8 @@ namespace Simulation
     {
         private readonly IWorld<WorldType> _world;
 
+        private bool simulating = false;
+
         public Engine(IWorld<WorldType> world)
         {
             _world = world;
@@ -15,7 +17,12 @@ namespace Simulation
 
         public async Task SimulateStep()
         {
+            if (simulating) return;
+            else simulating = true;
+
             await _world.SimulateStep();
+
+            simulating = false;
         }
     }
 }

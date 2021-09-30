@@ -11,11 +11,8 @@ namespace WebInterface.Display.DroneWorld
     {
         private Canvas2DContext _context;
 
-        private const int WIDTH = 1200;
-        private const int HEIGHT = 900;
-
-        public int GetWidth() => WIDTH;
-        public int GetHeight() => HEIGHT;
+        public int GetWidth() => StaticConfig.WIDTH;
+        public int GetHeight() => StaticConfig.HEIGHT;
 
         public Task InitializeContext(Canvas2DContext context)
         {
@@ -30,7 +27,7 @@ namespace WebInterface.Display.DroneWorld
 
             await _context.SetFillStyleAsync("#112233");
 
-            await _context.FillRectAsync(0, 0, WIDTH, HEIGHT);
+            await _context.FillRectAsync(0, 0, StaticConfig.WIDTH, StaticConfig.HEIGHT);
 
             await _context.EndBatchAsync();
         }
