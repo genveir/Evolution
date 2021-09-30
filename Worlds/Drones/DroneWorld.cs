@@ -1,4 +1,5 @@
-﻿using Geerten.Movement.Location;
+﻿using Geerten.Movement.Geometry;
+using Geerten.Movement.Location;
 using Genetics;
 using System;
 using System.Collections.Concurrent;
@@ -13,7 +14,10 @@ namespace Worlds.Drones
 {
     public class DroneWorld : IWorld<DroneWorld>
     {
-        SingleStrandGenome[] genomePool;
+        private SingleStrandGenome[] genomePool;
+
+        private SimulationResult currentResult;
+        public SimulationState StateToDisplay { get; private set; }
 
         public DroneWorld()
         {
@@ -29,9 +33,20 @@ namespace Worlds.Drones
 
         public async Task SimulateStep()
         {
+            if (currentResult == null || !currentResult.HasNext())
+            {
+                await RunGeneration();
+            }
+
+            StateToDisplay = currentResult.GetNext();
+        }
+
+        private async Task RunGeneration()
+        {
             var generation = await CreateGeneration();
 
             var results = await Simulate(generation);
+            currentResult = results.OrderBy(r => r).First();
 
             genomePool = await CreateNewBlueprints(results);
         }
@@ -74,7 +89,11 @@ namespace Worlds.Drones
 
         private static async Task<SimulationState> SimulateStep(SimulationState state)
         {
-            return await Task.FromResult(state);
+            var newMother = new DroneMother(new FixedLocation(state.DroneMother.Location, new vector(2, 0)), state.DroneMother.Blueprint);
+
+            var newState = new SimulationState(newMother, state.Drones, state.Asteroids);
+
+            return await Task.FromResult(newState);
         }
 
         private static Task<SingleStrandGenome[]> CreateNewBlueprints(IEnumerable<SimulationResult> results)
