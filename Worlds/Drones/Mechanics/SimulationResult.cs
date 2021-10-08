@@ -13,23 +13,14 @@ namespace Worlds.Drones.Mechanics
         {
             Mother = mother;
             Fitness = fitness;
-            _steps = steps.ToArray();
+            Steps = steps;
         }
 
         public DroneMother Mother { get; }
 
         public long Fitness { get; }
 
-        private readonly SimulationState[] _steps;
-        public IEnumerable<SimulationState> Steps => _steps;
-
-        private int enumerationIndex = 0;
-        public bool HasNext() => enumerationIndex < _steps.Length;
-
-        public SimulationState GetNext()
-        {
-            return _steps[enumerationIndex++];
-        }
+        public IEnumerable<SimulationState> Steps { get; }
 
         public int CompareTo(SimulationResult other)
         {
