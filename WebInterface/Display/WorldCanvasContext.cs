@@ -30,8 +30,5 @@ namespace WebInterface.Display
         {
             await _world.Display(_displayer);
         }
-
-        public int GetWidth() => _displayer.GetWidth();
-        public int GetHeight() => _displayer.GetHeight();
     }
 }

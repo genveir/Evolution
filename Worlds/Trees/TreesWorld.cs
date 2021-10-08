@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Worlds.Drones
+namespace Worlds.Trees
 {
-    public class DroneWorld : IWorld<DroneWorld>
+    public class TreesWorld : IWorld<TreesWorld>
     {
-        public async Task Display(IDisplayer<DroneWorld> displayer)
+        public async Task Display(IDisplayer<TreesWorld> displayer)
         {
             await displayer.Display(this);
         }

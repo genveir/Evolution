@@ -10,6 +10,8 @@ namespace Worlds.Basic
 {
     public class BasicWorld : IWorld<BasicWorld>
     {
+        public Guid Id = Guid.NewGuid();
+
         private const int Y_SIZE = 100;
         private const int X_SIZE = 100;
         private const double INITIAL_GRASS_SPAWN_RATE = 0.3d;

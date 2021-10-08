@@ -15,9 +15,6 @@ namespace WebInterface.Display.BasicWorld
     {
         private Canvas2DContext _context;
 
-        public int GetWidth() => 900;
-        public int GetHeight() => 900;
-
         public Task InitializeContext(Canvas2DContext context)
         {
             _context = context;

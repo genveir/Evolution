@@ -3,19 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Worlds.Drones;
 
-namespace WebInterface.Display.DroneWorld
+namespace WebInterface.Display.TreesWorld
 {
-    public class DroneWorldDisplayer : ICanvasDisplayer<Worlds.Drones.DroneWorld>
+    public class TreesWorldDisplayer : ICanvasDisplayer<Worlds.Trees.TreesWorld>
     {
         private Canvas2DContext _context;
-
-        private const int WIDTH = 1200;
-        private const int HEIGHT = 900;
-
-        public int GetWidth() => WIDTH;
-        public int GetHeight() => HEIGHT;
 
         public Task InitializeContext(Canvas2DContext context)
         {
@@ -24,13 +17,13 @@ namespace WebInterface.Display.DroneWorld
             return Task.CompletedTask;
         }
 
-        public async Task Display(Worlds.Drones.DroneWorld world)
+        public async Task Display(Worlds.Trees.TreesWorld world)
         {
             await _context.BeginBatchAsync();
 
             await _context.SetFillStyleAsync("#112233");
 
-            await _context.FillRectAsync(0, 0, WIDTH, HEIGHT);
+            await _context.FillRectAsync(0, 0, 900, 900);
 
             await _context.EndBatchAsync();
         }

@@ -1,15 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFramework>net5.0</TargetFramework>
-	</PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\Genetics\Genetics.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Geerten.Movement" Version="1.0.0" />
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Genetics\Genetics.csproj" />
+  </ItemGroup>
 
 </Project>

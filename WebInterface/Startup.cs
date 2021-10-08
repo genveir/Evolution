@@ -12,10 +12,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebInterface.Display;
 using WebInterface.Display.BasicWorld;
-using WebInterface.Display.DroneWorld;
+using WebInterface.Display.TreesWorld;
 using Worlds;
 using Worlds.Basic;
-using Worlds.Drones;
+using Worlds.Trees;
 
 namespace WebInterface
 {
@@ -37,16 +37,16 @@ namespace WebInterface
 
             SetupDisplayers(services);
 
-            SetupWorld<DroneWorld>(services);
+            SetupGenericWorldServices<TreesWorld>(services);
         }
 
         private static void SetupDisplayers(IServiceCollection services)
         {
             services.AddSingleton<ICanvasDisplayer<BasicWorld>, BasicWorldDisplayer>();
-            services.AddSingleton<ICanvasDisplayer<DroneWorld>, DroneWorldDisplayer>();
+            services.AddSingleton<ICanvasDisplayer<TreesWorld>, TreesWorldDisplayer>();
         }
 
-        private static void SetupWorld<WorldType>(IServiceCollection services)
+        private static void SetupGenericWorldServices<WorldType>(IServiceCollection services)
             where WorldType : class, IWorld<WorldType>
         {
             services.AddSingleton<Runner>();
@@ -57,8 +57,9 @@ namespace WebInterface
             services.AddSingleton<IWorld<WorldType>, WorldType>();
         }
 
+#pragma warning disable IDE0060 // not using env, but has to be on the method
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
@@ -71,5 +72,6 @@ namespace WebInterface
                 endpoints.MapFallbackToPage("/_Host");
             });
         }
+#pragma warning restore
     }
 }
