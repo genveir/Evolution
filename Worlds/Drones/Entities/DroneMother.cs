@@ -23,10 +23,5 @@ namespace Worlds.Drones.Entities
         public SingleStrandGenome Blueprint { get; }
 
         public ILocation Location { get; }
-
-        public override string ToString()
-        {
-            return $"DroneMother ({Location.X}, {Location.Y}), [{Blueprint}]";
-        }
     }
 }

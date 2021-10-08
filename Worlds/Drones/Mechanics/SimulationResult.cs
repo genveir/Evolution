@@ -9,7 +9,7 @@ namespace Worlds.Drones.Mechanics
 {
     public class SimulationResult : IComparable<SimulationResult>
     {
-        public SimulationResult(DroneMother mother, long fitness, IEnumerable<SimulationState> steps)
+        public SimulationResult(DroneMother mother, int fitness, IEnumerable<SimulationState> steps)
         {
             Mother = mother;
             Fitness = fitness;
@@ -18,7 +18,7 @@ namespace Worlds.Drones.Mechanics
 
         public DroneMother Mother { get; }
 
-        public long Fitness { get; }
+        public int Fitness { get; }
 
         public IEnumerable<SimulationState> Steps { get; }
 
