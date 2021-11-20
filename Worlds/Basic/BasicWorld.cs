@@ -63,5 +63,12 @@ namespace Worlds.Basic
         {
             await displayer.Display(this);
         }
+
+        public Task<IWorld<BasicWorld>> CreateNextGeneration()
+        {
+            IWorld<BasicWorld> nextGeneration = new BasicWorld();
+
+            return Task.FromResult(nextGeneration);
+        }
     }
 }

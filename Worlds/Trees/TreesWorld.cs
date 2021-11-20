@@ -17,5 +17,12 @@ namespace Worlds.Trees
         {
             return Task.CompletedTask;
         }
+
+        public Task<IWorld<TreesWorld>> CreateNextGeneration()
+        {
+            IWorld<TreesWorld> nextGeneration = new TreesWorld();
+
+            return Task.FromResult(nextGeneration);
+        }
     }
 }

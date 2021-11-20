@@ -11,5 +11,7 @@ namespace Worlds
         Task SimulateStep();
 
         Task Display(IDisplayer<WorldType> displayer);
+
+        Task<IWorld<WorldType>> CreateNextGeneration();
     }
 }
