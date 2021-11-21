@@ -15,12 +15,16 @@ namespace Worlds.Trees
 
         public Task SimulateStep()
         {
+            Age++;
+
             return Task.CompletedTask;
         }
 
-        public Task<IWorld<TreesWorld>> CreateNextGeneration()
+        public int Age { get; private set; } = 0;
+        public int GenerationSize => -1;
+        public Task<TreesWorld> CreateNextGeneration()
         {
-            IWorld<TreesWorld> nextGeneration = new TreesWorld();
+            var nextGeneration = new TreesWorld();
 
             return Task.FromResult(nextGeneration);
         }

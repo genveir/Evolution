@@ -36,14 +36,21 @@ namespace WebInterface
             services.AddServerSideBlazor();
 
             SetupDisplayers(services);
+            SetupInitializers(services);
 
-            SetupGenericWorldServices<TreesWorld>(services);
+            SetupGenericWorldServices<BasicWorld>(services);
         }
 
         private static void SetupDisplayers(IServiceCollection services)
         {
             services.AddSingleton<ICanvasDisplayer<BasicWorld>, BasicWorldDisplayer>();
             services.AddSingleton<ICanvasDisplayer<TreesWorld>, TreesWorldDisplayer>();
+        }
+
+        private static void SetupInitializers(IServiceCollection services)
+        {
+            services.AddSingleton<IWorldInitializer<BasicWorld>, BasicWorldInitializer>();
+            services.AddSingleton<IWorldInitializer<TreesWorld>, TreesWorldInitializer>();
         }
 
         private static void SetupGenericWorldServices<WorldType>(IServiceCollection services)
@@ -54,7 +61,7 @@ namespace WebInterface
             services.AddSingleton<ISimulationEngine, Engine<WorldType>>();
             services.AddSingleton<IWorldCanvasContext, WorldCanvasContext<WorldType>>();
 
-            services.AddSingleton<IWorld<WorldType>, WorldType>();
+            services.AddSingleton<IWorldProvider<WorldType>, WorldProvider<WorldType>>();
         }
 
 #pragma warning disable IDE0060 // not using env, but has to be on the method

@@ -10,7 +10,8 @@ namespace Worlds.Basic
 {
     public class BasicWorld : IWorld<BasicWorld>
     {
-        public Guid Id = Guid.NewGuid();
+        public int Age { get; private set; } = 0;
+        public int GenerationSize => 10;
 
         private const int Y_SIZE = 100;
         private const int X_SIZE = 100;
@@ -43,10 +44,8 @@ namespace Worlds.Basic
 
             await EachTile(Tile => Tile.ResolveSeedlings());
 
-            Tick++;
+            Age++;
         }
-
-        public int Tick { get; private set; }
 
         private async Task EachTile(Func<Tile, Task> action)
         {
@@ -64,9 +63,9 @@ namespace Worlds.Basic
             await displayer.Display(this);
         }
 
-        public Task<IWorld<BasicWorld>> CreateNextGeneration()
+        public Task<BasicWorld> CreateNextGeneration()
         {
-            IWorld<BasicWorld> nextGeneration = new BasicWorld();
+            var nextGeneration = new BasicWorld();
 
             return Task.FromResult(nextGeneration);
         }

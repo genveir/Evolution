@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Worlds;
 
@@ -6,16 +7,24 @@ namespace Simulation
 {
     public class Engine<WorldType> : ISimulationEngine where WorldType : IWorld<WorldType>
     {
-        private readonly IWorld<WorldType> _world;
+        private IWorldProvider<WorldType> _worldProvider;
 
-        public Engine(IWorld<WorldType> world)
+        public Engine(IWorldProvider<WorldType> worldprovider)
         {
-            _world = world;
+            _worldProvider = worldprovider;
         }
 
         public async Task SimulateStep()
         {
-            await _world.SimulateStep();
+            var world = _worldProvider.CurrentWorld;
+
+            if (world.Age == world.GenerationSize)
+            {
+                world = await world.CreateNextGeneration();
+                _worldProvider.CurrentWorld = world;
+            }
+
+            await world.SimulateStep();
         }
     }
 }

@@ -10,12 +10,12 @@ namespace WebInterface.Display
 {
     public class WorldCanvasContext<WorldType> : IWorldCanvasContext where WorldType : IWorld<WorldType>
     {
-        protected readonly IWorld<WorldType> _world;
+        protected readonly IWorldProvider<WorldType> _worldProvider;
         protected readonly ICanvasDisplayer<WorldType> _displayer;
 
-        public WorldCanvasContext(IWorld<WorldType> world, ICanvasDisplayer<WorldType> displayer)
+        public WorldCanvasContext(IWorldProvider<WorldType> worldProvider, ICanvasDisplayer<WorldType> displayer)
         {
-            _world = world;
+            _worldProvider = worldProvider;
             _displayer = displayer;
         }
 
@@ -28,7 +28,9 @@ namespace WebInterface.Display
 
         public async Task RenderFrameAsync()
         {
-            await _world.Display(_displayer);
+            var world = _worldProvider.CurrentWorld;
+
+            await world.Display(_displayer);
         }
     }
 }
