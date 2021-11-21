@@ -38,7 +38,7 @@ namespace WebInterface
             SetupDisplayers(services);
             SetupInitializers(services);
 
-            SetupGenericWorldServices<BasicWorld>(services);
+            SetupGenericWorldServices<DroneWorld>(services);
 
             services.AddHostedService<Runner>();
         }
