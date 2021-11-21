@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebInterface.Display.TreesWorld
 {
-    public class TreesWorldDisplayer : ICanvasDisplayer<Worlds.Trees.TreesWorld>
+    public class TreesWorldDisplayer : ICanvasDisplayer<Worlds.Drones.DroneWorld>
     {
         private Canvas2DContext _context;
 
@@ -17,7 +17,7 @@ namespace WebInterface.Display.TreesWorld
             return Task.CompletedTask;
         }
 
-        public async Task Display(Worlds.Trees.TreesWorld world)
+        public async Task Display(Worlds.Drones.DroneWorld world)
         {
             await _context.BeginBatchAsync();
 

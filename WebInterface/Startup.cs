@@ -15,7 +15,7 @@ using WebInterface.Display.BasicWorld;
 using WebInterface.Display.TreesWorld;
 using Worlds;
 using Worlds.Basic;
-using Worlds.Trees;
+using Worlds.Drones;
 
 namespace WebInterface
 {
@@ -46,13 +46,13 @@ namespace WebInterface
         private static void SetupDisplayers(IServiceCollection services)
         {
             services.AddSingleton<ICanvasDisplayer<BasicWorld>, BasicWorldDisplayer>();
-            services.AddSingleton<ICanvasDisplayer<TreesWorld>, TreesWorldDisplayer>();
+            services.AddSingleton<ICanvasDisplayer<DroneWorld>, TreesWorldDisplayer>();
         }
 
         private static void SetupInitializers(IServiceCollection services)
         {
             services.AddSingleton<IWorldInitializer<BasicWorld>, BasicWorldInitializer>();
-            services.AddSingleton<IWorldInitializer<TreesWorld>, TreesWorldInitializer>();
+            services.AddSingleton<IWorldInitializer<DroneWorld>, DroneWorldInitializer>();
         }
 
         private static void SetupGenericWorldServices<WorldType>(IServiceCollection services)
