@@ -2,8 +2,7 @@
 
 @page "/"
 @inject IJSRuntime jsRunTime
-@inject IWorldCanvasContext _context 
-@inject Runner runner
+@inject IWorldCanvasContext _context
 
 <div tabindex="0" @onkeydown="KeyDown">
     <div class="row align-items-center">
@@ -18,12 +17,7 @@
 @code {
     protected Blazor.Extensions.BECanvasComponent _canvasReference;
 
-        protected override void OnInitialized()
-        {
-            Task.Run(() => runner.Run());
-        }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
@@ -33,9 +27,11 @@
         }
     }
 
-    protected async Task KeyDown(KeyboardEventArgs e)
+    protected Task KeyDown(KeyboardEventArgs e)
     {
-        if (e.Key == " ") await runner.ToggleRunning();
+        if (e.Key == " ") Runner.ToggleRunning();
+
+        return Task.CompletedTask;
     }
 
     bool rendering = false;

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Extensions.Hosting;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -7,24 +9,31 @@ using System.Threading.Tasks;
 
 namespace Simulation
 {
-    public class Runner
+    public class Runner : BackgroundService
     {
-        private readonly ISimulationEngine _engine;
-        private bool _isRunning;
+        private ISimulationEngine _engine;
+        private static bool _isRunning;
 
-        public const int tickSizeInMS = 1000;
+        public int tickSizeInMS = 1000;
 
         public Runner(ISimulationEngine engine)
         {
             _engine = engine;
         }
 
-        public async Task Run()
+        protected override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
-            while (true)
+            await Loop(cancellationToken);
+        }
+
+        private async Task Loop(CancellationToken cancellationToken)
+        {
+            while (!cancellationToken.IsCancellationRequested)
             {
                 try
                 {
+                    Debug.WriteLine(Thread.CurrentThread.ManagedThreadId + ": " + DateTime.Now);
+
                     if (_isRunning)
                     {
                         var next = DateTime.Now.AddMilliseconds(tickSizeInMS);
@@ -48,9 +57,14 @@ namespace Simulation
             }
         }
 
-        public Task ToggleRunning()
+        public static void ToggleRunning()
         {
             _isRunning = !_isRunning;
+        }
+
+        public Task StopAsync(CancellationToken cancellationToken)
+        {
+            _isRunning = false;
 
             return Task.CompletedTask;
         }

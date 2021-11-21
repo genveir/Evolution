@@ -39,6 +39,8 @@ namespace WebInterface
             SetupInitializers(services);
 
             SetupGenericWorldServices<BasicWorld>(services);
+
+            services.AddHostedService<Runner>();
         }
 
         private static void SetupDisplayers(IServiceCollection services)
@@ -56,8 +58,6 @@ namespace WebInterface
         private static void SetupGenericWorldServices<WorldType>(IServiceCollection services)
             where WorldType : class, IWorld<WorldType>
         {
-            services.AddSingleton<Runner>();
-
             services.AddSingleton<ISimulationEngine, Engine<WorldType>>();
             services.AddSingleton<IWorldCanvasContext, WorldCanvasContext<WorldType>>();
 
