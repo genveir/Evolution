@@ -11,7 +11,7 @@ namespace Worlds.Basic
     public class BasicWorld : IWorld<BasicWorld>
     {
         public int Age { get; private set; } = 0;
-        public int GenerationSize => 10;
+        public int GenerationSize => 50;
 
         private const int Y_SIZE = 100;
         private const int X_SIZE = 100;

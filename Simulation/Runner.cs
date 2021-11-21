@@ -14,7 +14,7 @@ namespace Simulation
         private readonly ISimulationEngine _engine;
         private static bool _isRunning;
 
-        public int tickSizeInMS = 1000;
+        public int tickSizeInMS = 100;
 
         public Runner(ISimulationEngine engine)
         {
@@ -32,8 +32,6 @@ namespace Simulation
             {
                 try
                 {
-                    Debug.WriteLine(Thread.CurrentThread.ManagedThreadId + ": " + DateTime.Now);
-
                     TimeSpan delay = TimeSpan.FromMilliseconds(tickSizeInMS);
                     if (_isRunning)
                     {
