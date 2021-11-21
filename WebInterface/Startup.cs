@@ -64,9 +64,8 @@ namespace WebInterface
             services.AddSingleton<IWorldProvider<WorldType>, WorldProvider<WorldType>>();
         }
 
-#pragma warning disable IDE0060 // not using env, but has to be on the method
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
             app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
@@ -79,6 +78,5 @@ namespace WebInterface
                 endpoints.MapFallbackToPage("/_Host");
             });
         }
-#pragma warning restore
     }
 }

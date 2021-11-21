@@ -11,7 +11,7 @@ namespace Simulation
 {
     public class Runner : BackgroundService
     {
-        private ISimulationEngine _engine;
+        private readonly ISimulationEngine _engine;
         private static bool _isRunning;
 
         public int tickSizeInMS = 1000;
@@ -34,21 +34,18 @@ namespace Simulation
                 {
                     Debug.WriteLine(Thread.CurrentThread.ManagedThreadId + ": " + DateTime.Now);
 
+                    TimeSpan delay = TimeSpan.FromMilliseconds(tickSizeInMS);
                     if (_isRunning)
                     {
-                        var next = DateTime.Now.AddMilliseconds(tickSizeInMS);
+                        var next = DateTime.Now.Add(delay);
 
                         await _engine.SimulateStep();
 
-                        var delay = next - DateTime.Now;
+                        delay = next - DateTime.Now;
                         if (delay < TimeSpan.Zero) delay = TimeSpan.Zero;
+                    }
 
-                        await Task.Delay(delay);
-                    }
-                    else
-                    {
-                        await Task.Delay(1000);
-                    }
+                    await Task.Delay(delay, cancellationToken);
                 }
                 catch (Exception e)
                 {
@@ -60,13 +57,6 @@ namespace Simulation
         public static void ToggleRunning()
         {
             _isRunning = !_isRunning;
-        }
-
-        public Task StopAsync(CancellationToken cancellationToken)
-        {
-            _isRunning = false;
-
-            return Task.CompletedTask;
         }
     }
 }

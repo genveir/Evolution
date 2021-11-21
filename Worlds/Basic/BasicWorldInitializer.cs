@@ -8,6 +8,6 @@ namespace Worlds.Basic
 {
     public class BasicWorldInitializer : IWorldInitializer<BasicWorld>
     {
-        public BasicWorld CreateInitialWorld() => new BasicWorld();
+        public BasicWorld CreateInitialWorld() => new();
     }
 }

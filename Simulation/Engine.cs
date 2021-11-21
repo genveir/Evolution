@@ -7,7 +7,7 @@ namespace Simulation
 {
     public class Engine<WorldType> : ISimulationEngine where WorldType : IWorld<WorldType>
     {
-        private IWorldProvider<WorldType> _worldProvider;
+        private readonly IWorldProvider<WorldType> _worldProvider;
 
         public Engine(IWorldProvider<WorldType> worldprovider)
         {

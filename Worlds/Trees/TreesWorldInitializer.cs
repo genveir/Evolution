@@ -8,6 +8,6 @@ namespace Worlds.Trees
 {
     public class TreesWorldInitializer : IWorldInitializer<TreesWorld>
     {
-        public TreesWorld CreateInitialWorld() => new TreesWorld();
+        public TreesWorld CreateInitialWorld() => new();
     }
 }
