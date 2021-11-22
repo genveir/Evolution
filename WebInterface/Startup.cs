@@ -12,7 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebInterface.Display;
 using WebInterface.Display.BasicWorld;
-using WebInterface.Display.TreesWorld;
+using WebInterface.Display.Drones;
 using Worlds;
 using Worlds.Basic;
 using Worlds.Drones;
@@ -46,7 +46,7 @@ namespace WebInterface
         private static void SetupDisplayers(IServiceCollection services)
         {
             services.AddSingleton<ICanvasDisplayer<BasicWorld>, BasicWorldDisplayer>();
-            services.AddSingleton<ICanvasDisplayer<DroneWorld>, TreesWorldDisplayer>();
+            services.AddSingleton<ICanvasDisplayer<DroneWorld>, DroneWorldDisplayer>();
         }
 
         private static void SetupInitializers(IServiceCollection services)

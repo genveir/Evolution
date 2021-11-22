@@ -47,7 +47,10 @@ namespace Worlds.Drones
                 var x = Statics.Random.Next(100);
                 var y = Statics.Random.Next(100);
 
-                var asteroid = new Asteroid();
+                var asteroid = new Asteroid()
+                {
+                    Ore = Statics.Random.Next(10) + 5
+                };
 
                 tiles[y][x].Asteroid = asteroid;
                 this.Asteroids.Add(asteroid);
