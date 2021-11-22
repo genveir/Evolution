@@ -8,6 +8,6 @@ namespace Worlds.Drones.Entities
 {
     public class Asteroid
     {
-        
+        public long Ore { get; init; }
     }
 }

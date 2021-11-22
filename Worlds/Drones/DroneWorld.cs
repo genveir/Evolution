@@ -33,7 +33,7 @@ namespace Worlds.Drones
                 var x = Statics.Random.Next(100);
                 var y = Statics.Random.Next(100);
 
-                var drone = new Drone();
+                var drone = Drone.Random();
 
                 tiles[y][x].Drones.Add(drone);
                 this.Drones.Add(drone);
